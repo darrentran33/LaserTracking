@@ -20,17 +20,15 @@ while cap.isOpened():
         if cv2.contourArea(contour) < 900:
             continue
         cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
-        cv2.putText(frame1, "Status: {}".format('Movement'), (10, 20), cv2.FONT_HERSHEY_SIMPLEX,
-                    1, (0, 0, 255), 3)
-    #cv2.drawContours(frame1, contours, -1, (0, 255, 0), 2)
-
+       
     image = cv2.resize(frame1, (1280,720))
     out.write(image)
     cv2.imshow("feed", frame1)
     frame1 = frame2
     ret, frame2 = cap.read()
 
-    if cv2.waitKey(40) == 27:
+    ch = cv2.waitKey(1)
+    if ch & 0xFF == ord('q'):
         break
 
 cv2.destroyAllWindows()
