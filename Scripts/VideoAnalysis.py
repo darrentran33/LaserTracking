@@ -20,6 +20,12 @@ while cap.isOpened():
         if cv2.contourArea(contour) < 900:
             continue
         cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        
+        M= cv2.Moments(contour)
+        cX = int(M["m10"] / M["m00"])
+        cY = int(M["m01"] / M["m00"])
+        
+        print("X-coord: {}, Y-coord: {}" .format(cX,cY))
        
     image = cv2.resize(frame1, (1280,720))
     out.write(image)
