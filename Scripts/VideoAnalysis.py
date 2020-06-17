@@ -13,10 +13,14 @@ cap = cv2.VideoCapture(0)
 cap.set(3,480)
 cap.set(4,320)
 
-center = int(cols/2)
-moving_center = int(cols/2)
+x_center = int(cols/2)
+x_moving_center = int(cols/2)
 
-angle = 90
+y_center = int(row/2)
+y_moving_center = int(row/2)
+
+x_angle = 90
+y_angle = 90
 
 ret, frame1 = cap.read()
 ret, frame2 = cap.read()
@@ -52,12 +56,18 @@ while True:
     frame1 = frame2
     ret, frame2 = cap.read()
     
-    if moving_center < center
-        position += 1.5
-    if moving_center > center
-        position -= 1.5
-    pwm.setServoPosition(0,0,position)
-
+    if x_moving_center < x_center
+        x_angle += 1.5
+    if x_moving_center > x_center
+        x_angle -= 1.5
+    pwm.setServoPosition(0,0,x_angle)
+    
+    if y_moving_center < y_center
+        y_angle += 1.5
+    if y_moving_center > y_center
+        y_angle -= 1.5
+    pwm.setServoPosition(3,0,y_angle)
+    
     ch = cv2.waitKey(1)
     if ch & 0xFF == ord('q'):
         break
