@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-cap = cv2.Videocapture(0)
+cap = cv2.VideoCapture(0)
 
 ret, frame1 = cap.read()
 ret, frame2 = cap.read()
