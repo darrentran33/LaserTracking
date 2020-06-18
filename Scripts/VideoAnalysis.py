@@ -10,6 +10,7 @@ GPIO.setup(0, GPIO.OUT)
 pwm = = PCA9685(0x40, debug = False)
 pwm.setPWMFreq(60)
 pwm.setServoPosition(0,90)
+pwm.setServoPosition(3,90)
 rows, cols, _ = frame.shape 
 
 
