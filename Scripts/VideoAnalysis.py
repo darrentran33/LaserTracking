@@ -1,6 +1,11 @@
 import numpy as np
 import cv2
 from PCA9685 import PCA9685
+import RPi.GPIO as GPIO
+
+GPI.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(0, GPIO.OUT)
 
 pwm = = PCA9685(0x40, debug = False)
 pwm.setPWMFreq(60)
@@ -46,15 +51,17 @@ while True:
         
         moving_center = int((x + x + w)/2)
         
-        break
-        
         print("X-coord: {}, Y-coord: {}" .format(cX,cY))
+        
+        break
        
     #image = cv2.resize(frame1, (1280,720))
     out.write(image)
     cv2.imshow("feed", frame1)
     frame1 = frame2
     ret, frame2 = cap.read()
+    
+    GPIO.output(0,GPIO.HIGH)
     
     if x_moving_center < x_center
         x_angle += 1.5
