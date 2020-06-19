@@ -65,8 +65,6 @@ while True:
         
         break
        
-    #image = cv2.resize(frame1, (1280,720))
-    out.write(image)
     cv2.imshow("feed", frame1)
     frame1 = frame2
     ret, frame2 = cap.read()
