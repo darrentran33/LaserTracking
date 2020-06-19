@@ -3,11 +3,11 @@ import cv2
 from PCA9685 import PCA9685
 import RPi.GPIO as GPIO
 
-GPI.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(0, GPIO.OUT)
 
-pwm = = PCA9685(0x40, debug = False)
+pwm = PCA9685(0x40, debug = False)
 pwm.setPWMFreq(60)
 pwm.setServoPosition(0,90)
 pwm.setServoPosition(3,90)
@@ -50,7 +50,8 @@ while True:
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
         
-        moving_center = int((x + x + w)/2)
+        x_moving_center = int((x + x + w)/2)
+        y_moving_center = int((y + y + h)/2)
         
         print("X-coord: {}, Y-coord: {}" .format(cX,cY))
         
@@ -64,15 +65,15 @@ while True:
     
     GPIO.output(0,GPIO.HIGH)
     
-    if x_moving_center < x_center
+    if x_moving_center < x_center:
         x_angle += 1.5
-    if x_moving_center > x_center
+    if x_moving_center > x_center:
         x_angle -= 1.5
     pwm.setServoPosition(0,0,x_angle)
     
-    if y_moving_center < y_center
+    if y_moving_center < y_center:
         y_angle += 1.5
-    if y_moving_center > y_center
+    if y_moving_center > y_center:
         y_angle -= 1.5
     pwm.setServoPosition(3,0,y_angle)
     
