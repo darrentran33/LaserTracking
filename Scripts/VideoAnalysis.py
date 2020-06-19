@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(0, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
 
 import board
 import busio
@@ -40,6 +40,7 @@ y_angle = 90
 
 print(frame1.shape)
 while True:
+    GPIO.output(17,GPIO.HIGH)
     diff = cv2.absdiff(frame1, frame2)
     gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray, (5,5), 0)
@@ -68,8 +69,6 @@ while True:
     cv2.imshow("feed", frame1)
     frame1 = frame2
     ret, frame2 = cap.read()
-    
-    GPIO.output(0,GPIO.HIGH)
     
     if x_moving_center < x_center:
         x_angle += 1.5
