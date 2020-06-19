@@ -1,18 +1,25 @@
 import numpy as np
 import cv2
-from PCA9685 import PCA9685
+from adafruit_servokit import ServoKit
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(0, GPIO.OUT)
 
-pwm = PCA9685(0x40, debug = False)
-pwm.setPWMFreq(60)
-pwm.setServoPosition(0,90)
-pwm.setServoPosition(3,90)
-rows, cols, _ = frame.shape 
+import board
+import busio
+import adafruit_pca9685
+i2c = busio.I2C(board.SCL, board.SDA)
+pca = adafruit_pca9685.PCA9685(i2c)
 
+pca.frequency = 60
+
+kit = ServoKit(channels=16)
+kit.servo[0].angle = 90
+kit.servo[3].angle = 90
+
+rows, cols, _ = frame.shape 
 
 cap = cv2.VideoCapture(0)
 
@@ -69,13 +76,13 @@ while True:
         x_angle += 1.5
     if x_moving_center > x_center:
         x_angle -= 1.5
-    pwm.setServoPosition(0,0,x_angle)
+    kit.servo[0].angle = x_angle
     
     if y_moving_center < y_center:
         y_angle += 1.5
     if y_moving_center > y_center:
         y_angle -= 1.5
-    pwm.setServoPosition(3,0,y_angle)
+    kit.servo[3].angle = y_angle
     
     ch = cv2.waitKey(1)
     if ch & 0xFF == ord('q'):
