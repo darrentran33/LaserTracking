@@ -19,12 +19,15 @@ kit = ServoKit(channels=16)
 kit.servo[0].angle = 90
 kit.servo[3].angle = 90
 
-rows, cols, _ = frame.shape 
-
 cap = cv2.VideoCapture(0)
 
 cap.set(3,480)
 cap.set(4,320)
+
+ret, frame1 = cap.read()
+ret, frame2 = cap.read()
+
+rows, cols, _ = frame.shape 
 
 x_center = int(cols/2)
 x_moving_center = int(cols/2)
@@ -35,8 +38,6 @@ y_moving_center = int(row/2)
 x_angle = 90
 y_angle = 90
 
-ret, frame1 = cap.read()
-ret, frame2 = cap.read()
 print(frame1.shape)
 while True:
     diff = cv2.absdiff(frame1, frame2)
@@ -44,7 +45,7 @@ while True:
     blur = cv2.GaussianBlur(gray, (5,5), 0)
     _, thresh = cv2.threshold(blur, 20, 255, cv2.THRESH_BINARY)
     dilated = cv2.dilate(thresh, None, iterations=3)
-    contours, _ = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, _ = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
         (x, y, w, h) = cv2.boundingRect(contour)
@@ -53,7 +54,7 @@ while True:
             continue
         cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
         
-        M= cv2.Moments(contour)
+        M= cv2.moments(contour)
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
         
