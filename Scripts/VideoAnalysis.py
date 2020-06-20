@@ -21,8 +21,8 @@ kit.servo[3].angle = 90
 
 cap = cv2.VideoCapture(0)
 
-cap.set(3,480)
-cap.set(4,320)
+cap.set(3,320)
+cap.set(4,240)
 
 ret, frame1 = cap.read()
 ret, frame2 = cap.read()
