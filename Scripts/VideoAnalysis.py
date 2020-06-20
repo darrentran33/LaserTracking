@@ -53,7 +53,9 @@ while True:
 
         if cv2.contourArea(contour) < 900:
             continue
-        cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        #cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        cv2.line(frame1, (x_moving_center,0),(x_moving_center,480),(0,250,0),2)
+        cv2.line(frame1, (0,y_moving_center),(480,y_moving_center),(0,250,0),2)
         
         M= cv2.moments(contour)
         cX = int(M["m10"] / M["m00"])
@@ -70,15 +72,15 @@ while True:
     frame1 = frame2
     ret, frame2 = cap.read()
     
-    if x_moving_center < x_center:
+    if x_moving_center < x_center-30:
         x_angle += 1.5
-    if x_moving_center > x_center:
+    if x_moving_center > x_center+30:
         x_angle -= 1.5
     kit.servo[0].angle = x_angle
     
-    if y_moving_center < y_center:
+    if y_moving_center < y_center-30:
         y_angle += 1.5
-    if y_moving_center > y_center:
+    if y_moving_center > y_center+30:
         y_angle -= 1.5
     kit.servo[3].angle = y_angle
     
