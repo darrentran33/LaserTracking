@@ -54,8 +54,10 @@ while True:
         if cv2.contourArea(contour) < 900:
             continue
         #cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
-        cv2.line(frame1, (x_moving_center,0),(x_moving_center,480),(0,250,0),2)
-        cv2.line(frame1, (0,y_moving_center),(480,y_moving_center),(0,250,0),2)
+        cv2.line(frame1, (x_center,0),(x_center,480),(0,0,250),2)
+        cv2.line(frame1, (0,y_center),(480,y_center),(0,0,250),2)
+        cv2.line(frame1, (x_moving_center,0),(x_moving_center,480),(0,250,250),2)
+        cv2.line(frame1, (0,y_moving_center),(480,y_moving_center),(0,250,250),2)
         
         M= cv2.moments(contour)
         cX = int(M["m10"] / M["m00"])
