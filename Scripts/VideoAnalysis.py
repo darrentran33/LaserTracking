@@ -72,17 +72,19 @@ while True:
     frame1 = frame2
     ret, frame2 = cap.read()
     
-    if x_moving_center < x_center-30:
-        x_angle += 1.5
-    if x_moving_center > x_center+30:
-        x_angle -= 1.5
-    kit.servo[0].angle = x_angle
+    while x_angle < 180 and x_angle > 0:
+        if x_moving_center < x_center-30:
+            x_angle += 1.5
+        elif x_moving_center > x_center+30:
+            x_angle -= 1.5
+        kit.servo[0].angle = x_angle
     
-    if y_moving_center < y_center-30:
-        y_angle += 1.5
-    if y_moving_center > y_center+30:
-        y_angle -= 1.5
-    kit.servo[3].angle = y_angle
+    while y_angle < 180 and y_angle > 0:
+        if y_moving_center < y_center-30:
+            y_angle += 1.5
+        elif y_moving_center > y_center+30:
+            y_angle -= 1.5
+        kit.servo[3].angle = y_angle
     
     ch = cv2.waitKey(1)
     if ch & 0xFF == ord('q'):
