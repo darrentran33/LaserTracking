@@ -57,11 +57,7 @@ while True:
 
         if cv2.contourArea(contour) < 900:
             continue
-        #cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
-        cv2.line(frame1, (x_center,0),(x_center,480),(0,0,250),2)
-        cv2.line(frame1, (0,y_center),(480,y_center),(0,0,250),2)
-        cv2.line(frame1, (x_moving_center,0),(x_moving_center,480),(0,250,250),2)
-        cv2.line(frame1, (0,y_moving_center),(480,y_moving_center),(0,250,250),2)
+        cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
         GPIO.output(17,GPIO.HIGH)
         
         M= cv2.moments(contour)
@@ -70,8 +66,6 @@ while True:
         
         x_moving_center = int((x + x + w)/2)
         y_moving_center = int((y + y + h)/2)
-        
-        #print("X-coord: {}, Y-coord: {}" .format(cX,cY))
         
         break
        
@@ -84,7 +78,7 @@ while True:
         kit.servo[0].angle = x_angle
     
     while y_angle < 180 and y_angle > 0:
-        y_angle = round((slope_y*y_moving_center)+180)
+        y_angle = round(-1*slope_y*y_moving_center)
         kit.servo[3].angle = y_angle
     
     ch = cv2.waitKey(1)
@@ -93,4 +87,3 @@ while True:
 
 cv2.destroyAllWindows()
 cap.release()
-out.release()
