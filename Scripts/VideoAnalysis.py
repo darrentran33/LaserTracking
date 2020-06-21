@@ -21,8 +21,13 @@ kit.servo[3].angle = 90
 
 cap = cv2.VideoCapture(0)
 
-cap.set(3,320)
-cap.set(4,240)
+width = 320
+height = 240
+
+slope_x = (180/(-1*width))
+slope_y = (180/(-1*height))
+cap.set(3,width)
+cap.set(4,height)
 
 ret, frame1 = cap.read()
 ret, frame2 = cap.read()
@@ -38,9 +43,8 @@ y_moving_center = int(row/2)
 x_angle = 90
 y_angle = 90
 
-print(frame1.shape)
 while True:
-    GPIO.output(17,GPIO.HIGH)
+    
     diff = cv2.absdiff(frame1, frame2)
     gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray, (5,5), 0)
@@ -58,6 +62,7 @@ while True:
         cv2.line(frame1, (0,y_center),(480,y_center),(0,0,250),2)
         cv2.line(frame1, (x_moving_center,0),(x_moving_center,480),(0,250,250),2)
         cv2.line(frame1, (0,y_moving_center),(480,y_moving_center),(0,250,250),2)
+        GPIO.output(17,GPIO.HIGH)
         
         M= cv2.moments(contour)
         cX = int(M["m10"] / M["m00"])
@@ -66,7 +71,7 @@ while True:
         x_moving_center = int((x + x + w)/2)
         y_moving_center = int((y + y + h)/2)
         
-        print("X-coord: {}, Y-coord: {}" .format(cX,cY))
+        #print("X-coord: {}, Y-coord: {}" .format(cX,cY))
         
         break
        
@@ -75,17 +80,11 @@ while True:
     ret, frame2 = cap.read()
     
     while x_angle < 180 and x_angle > 0:
-        if x_moving_center < x_center-30:
-            x_angle += 1.5
-        elif x_moving_center > x_center+30:
-            x_angle -= 1.5
+        x_angle = round((slope_x*x_moving_center)+180)
         kit.servo[0].angle = x_angle
     
     while y_angle < 180 and y_angle > 0:
-        if y_moving_center < y_center-30:
-            y_angle += 1.5
-        elif y_moving_center > y_center+30:
-            y_angle -= 1.5
+        y_angle = round((slope_y*y_moving_center)+180)
         kit.servo[3].angle = y_angle
     
     ch = cv2.waitKey(1)
