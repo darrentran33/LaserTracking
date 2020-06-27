@@ -32,7 +32,7 @@ cap.set(4,height)
 ret, frame1 = cap.read()
 ret, frame2 = cap.read()
 
-rows, cols, _ = frame.shape 
+rows, cols, _ = frame1.shape 
 
 x_center = int(cols/2)
 x_moving_center = int(cols/2)
