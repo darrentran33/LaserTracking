@@ -31,20 +31,20 @@ slope_y = (180/(-1*height))
 cap.set(3,width)
 cap.set(4,height)
 
-rows, cols, _ = frame.shape 
+ret, img = cap.read()
+rows, cols, _ = img.shape 
 
 x_center = int(cols/2)
 x_moving_center = int(cols/2)
 
-y_center = int(row/2)
-y_moving_center = int(row/2)
+y_center = int(rows/2)
+y_moving_center = int(rows/2)
 
 x_angle = 90
 y_angle = 90
 
 while True:
     
-    ret, img = cap.read
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     tool = tool_cascade.detectMultiScale(gray, 65, 45)
 
