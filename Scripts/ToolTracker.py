@@ -62,6 +62,7 @@ while True:
         break
     
     cv2.imshow('img',img)
+    ret, img = cap.read()
     while x_angle < 180 and x_angle > 0:
         x_angle = round((slope_x*x_moving_center)+180)
         kit.servo[0].angle = x_angle
