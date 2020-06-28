@@ -19,4 +19,4 @@ In both of the scripts, the current location of the object is track and an algor
 * Raspberry Pi 2 Model B
 * Raspberry Pi Camera Module 5MP 1080p
 
-<img src="https://github.com/darrentran33/LaserTracking/blob/master/Screenshots/Camera.JPG" width="400" height="300">
+<img src="https://github.com/darrentran33/LaserTracking/blob/master/Screenshots/Camera.JPG" width="600" height="500">
