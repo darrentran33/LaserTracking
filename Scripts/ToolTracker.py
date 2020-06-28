@@ -52,10 +52,6 @@ while True:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,255,0),2)
         GPIO.output(17,GPIO.HIGH)
         
-        M= cv2.moments(contour)
-        cX = int(M["m10"] / M["m00"])
-        cY = int(M["m01"] / M["m00"])
-        
         x_moving_center = int((x + x + w)/2)
         y_moving_center = int((y + y + h)/2)
         
