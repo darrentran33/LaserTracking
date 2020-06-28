@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(17, GPIO.OUT)
 
-tool_cascade = cv2.CascadeClassifier('toolcascade.xml')
+tool_cascade = cv2.CascadeClassifier('cascade.xml')
 
 import board
 import busio
@@ -46,7 +46,7 @@ y_angle = 90
 while True:
     
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    tool = tool_cascade.detectMultiScale(gray, 65, 45)
+    tool = tool_cascade.detectMultiScale(gray, scaleFactor =1.05, minNeighbors=5, minSize = (50,50))
 
     for (x,y,w,h) in tool:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,255,0),2)
