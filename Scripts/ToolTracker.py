@@ -32,7 +32,8 @@ cap.set(3,width)
 cap.set(4,height)
 
 ret, img = cap.read()
-rows, cols, _ = img.shape 
+rows, cols, _ = img.shape
+# Collects the angle information
 
 x_center = int(cols/2)
 x_moving_center = int(cols/2)
@@ -47,6 +48,7 @@ while True:
     
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     tool = tool_cascade.detectMultiScale(gray, scaleFactor =1.05, minNeighbors=5, minSize = (50,50))
+    # Adjust scale factor for better detection
 
     for (x,y,w,h) in tool:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,255,0),2)
@@ -54,6 +56,7 @@ while True:
         
         x_moving_center = int((x + x + w)/2)
         y_moving_center = int((y + y + h)/2)
+        # parameter to change the laser position
         
         break
     
@@ -67,7 +70,8 @@ while True:
         y_angle = round(-1*slope_y*y_moving_center)
         kit.servo[3].angle = y_angle
     
-    ch = cv2.waitKey(1)
+    ch = cv2.waitKey(30)
+    #change this to alter lag in camera
     if ch & 0xFF == ord('q'):
         break
 
