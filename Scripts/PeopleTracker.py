@@ -56,6 +56,7 @@ while True:
         (x, y, w, h) = cv2.boundingRect(contour)
 
         if cv2.contourArea(contour) < 900:
+            #adjust the contour area for better detection
             continue
         cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
         GPIO.output(17,GPIO.HIGH)
