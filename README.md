@@ -4,8 +4,8 @@ This project focuses on object detection using the OpenCV API. The PeopleTracker
 
 In both of the scripts, the current location of the object is track and an algorithm is used to track the vertical and horizontal deviation from the center. the difference is then relayed two servo motors representing 2 DOF: one controlling pitch and another controllign yaw. Based on the object's location, a laser will be directed to point to the object.
 
-<img src="https://github.com/darrentran33/LaserTracking/blob/master/Screenshots/physrep.gif" width="600" height="500">
-<img src="https://github.com/darrentran33/LaserTracking/blob/master/Screenshots/tracking3.gif" width="600" height="500">
+<img src="https://github.com/darrentran33/LaserTracking/blob/master/Screenshots/physrep.gif" width="900" height="500">
+<img src="https://github.com/darrentran33/LaserTracking/blob/master/Screenshots/tracking3.gif" width="900" height="500">
 
 ## Software Libraries Used
 
