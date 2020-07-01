@@ -72,6 +72,7 @@ while True:
     ch = cv2.waitKey(30)
     #change this to alter lag in camera feed
     if ch & 0xFF == ord('q'):
+        GPIO.output(17,GPIO.LOW)
         break
 
 cap.release()
