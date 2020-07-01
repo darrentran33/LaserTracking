@@ -62,16 +62,15 @@ while True:
     
     cv2.imshow('img',img)
     ret, img = cap.read()
-    while x_angle < 180 and x_angle > 0:
-        x_angle = round((slope_x*x_moving_center)+180)
-        kit.servo[0].angle = x_angle
     
-    while y_angle < 180 and y_angle > 0:
-        y_angle = round(-1*slope_y*y_moving_center)
-        kit.servo[3].angle = y_angle
+    x_angle = round((slope_x*x_moving_center)+180)
+    kit.servo[0].angle = x_angle
+    
+    y_angle = round(-1*slope_y*y_moving_center)
+    kit.servo[3].angle = y_angle
     
     ch = cv2.waitKey(30)
-    #change this to alter lag in camera
+    #change this to alter lag in camera feed
     if ch & 0xFF == ord('q'):
         break
 
